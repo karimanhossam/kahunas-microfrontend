@@ -9,7 +9,7 @@ const printCompilationMessage = require('./compilation.config.js');
 
 module.exports = (_, argv) => ({
   output: {
-    publicPath: "http://localhost:3001/",
+    publicPath: "http://localhost:3001/" ,
   },
 
   resolve: {
@@ -64,8 +64,12 @@ module.exports = (_, argv) => ({
     new ModuleFederationPlugin({
       name: "clients",
       filename: "remoteEntry.js",
-      remotes: {},
-      exposes: {},
+      remotes: {
+        host: "host@http://localhost:3000/remoteEntry.js",
+      },
+      exposes: {
+        "./Home": "./src/pages/Home.jsx",
+      },
       shared: {
         ...deps,
         react: {

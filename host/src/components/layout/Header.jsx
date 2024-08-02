@@ -1,23 +1,52 @@
 import styled from "styled-components";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import PathConstants from "../../routes/pathConstants";
+
+const hostUrl = process.env.REACT_APP_HOST_URL || "http://localhost:3000";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const isActiveLink = (path) => location.pathname === path;
+
+  const handleLoginClick = () => {
+    navigate(PathConstants.LOGIN); 
+  };
+
   return (
     <HeaderContainer>
       <div className="header-menu">
         <div className="header-left">
-          <img src="/assets/images/kahunas-logo.svg" alt="Kahunas Logo" />
-          <ul className="header-menu">
-            <li>About</li>
-            <li>Features</li>
-            <li>Demo</li>
-            <li>Coaches</li>
-            <li>Pricing</li>
+          <Link to={PathConstants.HOME}>
+            <img
+              src={`${hostUrl}/assets/images/kahunas-logo.svg`}
+              alt="Kahunas Logo"
+            />
+          </Link>
+          <ul className="header-list">
+            <li>
+              <Link
+                to={PathConstants.CLIENTS}
+                className={isActiveLink(PathConstants.CLIENTS) ? "active" : ""}
+              >
+                Clients
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={PathConstants.LIBRARY}
+                className={isActiveLink(PathConstants.LIBRARY) ? "active" : ""}
+              >
+                Library
+              </Link>
+            </li>
           </ul>
         </div>
 
         <div className="header-right">
-          <button>Login</button>
-          <div className="lang-wrapper">
+          <button onClick={handleLoginClick}>Login</button>
+          <div className="language-switcher">
             <span>EN</span>
             <span>AR</span>
           </div>
@@ -32,8 +61,6 @@ const HeaderContainer = styled.div`
   background: #fff;
   padding: 22px 0px;
   border-bottom: 1px solid #edf0f5;
-  position: fixed;
-  z-index: 1000;
 
   .header-menu {
     display: flex;
@@ -47,16 +74,30 @@ const HeaderContainer = styled.div`
       align-items: center;
       gap: 60px;
 
-      .header-menu {
+      .header-list {
         padding: 0px;
-        list-style: none;
-        text-decoration: none;
         font-size: 14px;
         font-weight: 500;
-        color: #2b3359;
         display: flex;
         align-items: center;
         gap: 24px;
+
+        li {
+          list-style: none;
+        }
+
+        a {
+          color: #2b3359;
+          text-decoration: none;
+
+          &.active {
+            color: #3e97ff;
+          }
+
+          &:hover {
+            color: #3e97ff;
+          }
+        }
       }
     }
 
@@ -84,7 +125,7 @@ const HeaderContainer = styled.div`
         }
       }
 
-      .lang-wrapper {
+      .language-switcher {
         display: flex;
         align-items: center;
         gap: 20px;

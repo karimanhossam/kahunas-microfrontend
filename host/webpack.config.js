@@ -64,8 +64,14 @@ module.exports = (_, argv) => ({
     new ModuleFederationPlugin({
       name: "host",
       filename: "remoteEntry.js",
-      remotes: {},
-      exposes: {},
+        remotes: {
+          clients: "clients@http://localhost:3001/remoteEntry.js",
+          library: "library@http://localhost:3002/remoteEntry.js",
+        },
+      
+      exposes: {
+        "./Error": "./src/pages/Error.jsx",
+      },
       shared: {
         ...deps,
         react: {
