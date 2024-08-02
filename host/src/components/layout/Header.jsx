@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import PathConstants from "../../routes/pathConstants";
-
-const hostUrl = process.env.REACT_APP_HOST_URL || "http://localhost:3000";
+import logo from "../../assets/images/kahunas-logo.svg";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -20,7 +19,7 @@ const Header = () => {
         <div className="header-left">
           <Link to={PathConstants.HOME}>
             <img
-              src={`${hostUrl}/assets/images/kahunas-logo.svg`}
+              src={logo}
               alt="Kahunas Logo"
             />
           </Link>
