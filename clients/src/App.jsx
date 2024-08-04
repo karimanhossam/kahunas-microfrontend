@@ -3,18 +3,25 @@ import ReactDOM from "react-dom/client";
 import { createGlobalStyle } from "styled-components";
 import {  BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { I18nextProvider } from 'react-i18next';
+import clientsInstance from "./i18n";
 import Error from "host/Error";
 import Home from "./pages/Home";
-import clientsInstance from "./i18n";
+import Client from "./pages/Client";
+import PathConstants from "./pathConstants";
 
 
 const GlobalStyle = createGlobalStyle`
   body {
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #3f4254;
+    background-color: #fff;
   }
 `;
+
 
 const App = () => {
 
@@ -22,7 +29,9 @@ const App = () => {
     <I18nextProvider i18n={clientsInstance}>
         <GlobalStyle />
         <Routes>
-          <Route index element={<Home />} />
+          <Route index element={<Home />} />          
+          <Route path={PathConstants.CLIENT} element={<Client/>}/>
+          <Route path="*" element={<Error/>}/>
         </Routes>
     </I18nextProvider>
   );

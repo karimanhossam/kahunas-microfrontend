@@ -15,7 +15,7 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login(email, password, () => navigate(PathConstants.CLIENTS));
+    login(email, password, ()=> navigate(PathConstants.CLIENTS));
   };
 
   return (
@@ -31,6 +31,7 @@ const LoginForm = () => {
             value={email}
             placeholder={t("email")}
             onChange={(e) => setEmail(e.target.value)}
+            autoComplete="email"
           />
       
           <input
@@ -38,6 +39,7 @@ const LoginForm = () => {
             value={password}
             placeholder={t("password")}
             onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
           />
         <button type="submit">{t("login")}</button>
       </FormContainer>

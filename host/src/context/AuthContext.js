@@ -1,54 +1,32 @@
-import  { createContext, useState, useEffect } from 'react';
-import { useNavigate, useLocation} from 'react-router-dom';
-import PathConstants from '../pathConstants';
-
+import { createContext, useState, useEffect } from "react";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const token = localStorage.getItem("authToken");
+  const [isAuthenticated, setIsAuthenticated] = useState(!!token);
   const [user, setUser] = useState(null);
-  const navigate = useNavigate();
-  const location = useLocation();
-  const token = localStorage.getItem('authToken');
 
-
-  useEffect(() => {
-    if (token) {
-      console.log("Logged in already!")
-      setIsAuthenticated(true);
-    }
-    console.log("Please log in")
-  }, []);
-
-
-  useEffect(() => {
-    if (!isAuthenticated && location.pathname !== PathConstants.HOME) {
-      navigate(PathConstants.LOGIN);
-    }
-  }, [isAuthenticated, location]);
-
-
-
-  const login = (email, password) => {
-    if (email === 'coach@kahunas.io' && password === 'pass@123') {
+  const login = (email, password, onLogin) => {
+    if (email === "coach@kahunas.io" && password === "pass@123") {
       setIsAuthenticated(true);
       setUser({ email });
-      localStorage.setItem('authToken', 'kahunas-token');
-      navigate(PathConstants.CLIENTS)
+      localStorage.setItem("authToken", "kahunas-token");
+      onLogin();
     } else {
-      alert('Invalid credentials');
+      alert("Invalid credentials");
     }
   };
 
-  const logout = () => {
+  const logout = (onLogout) => {
     setIsAuthenticated(false);
     setUser(null);
-    localStorage.removeItem('authToken');
+    localStorage.removeItem("authToken");
+    onLogout();
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, user, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

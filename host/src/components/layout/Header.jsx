@@ -22,8 +22,9 @@ const Header = () => {
   };
 
   const handleLogoutClick = () => {
-    logout(()=> navigate(PathConstants.HOME));
+    logout(()=>navigate(PathConstants.LOGIN));
   };
+
   const switchLanguage = (languageKey) => {
     switchAllLanguages(languageKey);
   };

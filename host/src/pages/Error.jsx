@@ -1,4 +1,4 @@
 const Error = () => {
-    return <>Error Page</>
+    return <>404 Not Found</>
 }
 export default Error;

@@ -12,6 +12,7 @@ import LoginForm from "./components/LoginForm";
 import Clients from "clients/App";
 import Library from "library/App";
 import Error from "./pages/Error";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -31,8 +32,8 @@ const GlobalStyle = createGlobalStyle`
 
 const App = () => {
   return (
-      <Router>
-            <AuthProvider>
+    <Router>
+      <AuthProvider>
         <I18nextProvider i18n={hostInstance}>
           <GlobalStyle />
           <Header />
@@ -40,26 +41,32 @@ const App = () => {
             <React.Suspense fallback="Loading...">
               <Routes>
                 <Route path={PathConstants.HOME} element={<Home />} />
-                <Route path={PathConstants.LOGIN} element={<LoginForm />} />
                 <Route
                   path={`${PathConstants.CLIENTS}/*`}
-                  element={<Clients />}
-                >
-                  <Route index element={<Clients />} />
-                </Route>
+                  element={
+                    <ProtectedRoute>
+                      <Clients />
+                    </ProtectedRoute>
+                  }
+                />
+
                 <Route
                   path={`${PathConstants.LIBRARY}/*`}
-                  element={<Library />}
-                >
-                  <Route index element={<Library />} />
-                </Route>
+                  element={
+                    <ProtectedRoute>
+                      <Library />
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route path={PathConstants.LOGIN} element={<LoginForm />} />
                 <Route path="*" element={<Error />} />
               </Routes>
             </React.Suspense>
           </div>
         </I18nextProvider>
-        </AuthProvider>
-      </Router>
+      </AuthProvider>
+    </Router>
   );
 };
 
