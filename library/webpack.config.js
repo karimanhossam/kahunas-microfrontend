@@ -57,6 +57,11 @@ module.exports = (_, argv) => ({
           loader: "babel-loader",
         },
       },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: "asset/resource",
+      },
+      { test: /\.json$/, type: "json" },
     ],
   },
 
@@ -66,10 +71,12 @@ module.exports = (_, argv) => ({
       filename: "remoteEntry.js",
       remotes: {
         host: "host@http://localhost:3000/remoteEntry.js",
+        clients: "clients@http://localhost:3001/remoteEntry.js",
       }, 
-        exposes: {
-          "./Home": "./src/pages/Home.jsx",
-        },
+      exposes: {
+        "./App": "./src/App.jsx",
+        './hooks/useSwitchLibraryLanguage': './src/hooks/useSwitchLanguage',
+      },
       shared: {
         ...deps,
         react: {

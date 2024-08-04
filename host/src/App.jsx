@@ -1,33 +1,50 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import routes from "./routes"
-import Layout from "./components/layout"
+import { createGlobalStyle } from "styled-components";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { I18nextProvider } from "react-i18next";
+import PathConstants from "./pathConstants";
+import hostInstance from "./i18n";
+import Header from "./components/layout/Header";
+import Home from "./pages/Home";
+import Clients from "clients/App";
+import Library from "library/App";
 import Error from "./pages/Error";
 
-import "./index.css";
+const GlobalStyle = createGlobalStyle`
+  body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+  }
+`;
 
 const App = () => {
-
-  const router = createBrowserRouter([
-    {
-      element: <Layout />,
-      errorElement: <Error />,
-      children: routes
-    },
-  ])
-
- return (
-      <RouterProvider router={router} />
-  )
+  return (
+    <Router>
+      <I18nextProvider i18n={hostInstance}>
+      <GlobalStyle />
+        <Header />
+        <React.Suspense fallback="Loading...">
+          <Routes>
+            <Route path={PathConstants.HOME} element={<Home />} />
+            <Route path={`${PathConstants.CLIENTS}/*`} element={<Clients />}>
+              <Route index element={<Clients />} />
+            </Route>
+            <Route path={`${PathConstants.LIBRARY}/*`} element={<Library />}>
+              <Route index element={<Library />} />
+            </Route>
+            <Route path="*" element={<Error />} />
+          </Routes>
+        </React.Suspense>
+      </I18nextProvider>
+    </Router>
+  );
 };
 
-const rootElement = document.getElementById("app")
-if (!rootElement) throw new Error("Failed to find the root element")
+const rootElement = document.getElementById("app");
+if (!rootElement) throw new Error("Failed to find the root element");
 
-const root = ReactDOM.createRoot(rootElement)
+const root = ReactDOM.createRoot(rootElement);
 
-root.render(<App />)
+root.render(<App />);

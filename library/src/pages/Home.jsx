@@ -1,4 +1,9 @@
+import { useTranslation } from "react-i18next";
+
 const Home = () => {
-    return <>Library Home Page</>
+
+    const {t} = useTranslation();
+
+    return <>{t("hello")} library</>
 }
 export default Home;

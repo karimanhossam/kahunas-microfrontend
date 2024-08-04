@@ -1,11 +1,11 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
-const path = require('path');
-const Dotenv = require('dotenv-webpack');
+const path = require("path");
+const Dotenv = require("dotenv-webpack");
 
 const deps = require("./package.json").dependencies;
 
-const printCompilationMessage = require('./compilation.config.js');
+const printCompilationMessage = require("./compilation.config.js");
 
 module.exports = (_, argv) => ({
   output: {
@@ -19,22 +19,22 @@ module.exports = (_, argv) => ({
   devServer: {
     port: 3000,
     historyApiFallback: true,
-    watchFiles: [path.resolve(__dirname, 'src')],
+    watchFiles: [path.resolve(__dirname, "src")],
     onListening: function (devServer) {
-      const port = devServer.server.address().port
+      const port = devServer.server.address().port;
 
-      printCompilationMessage('compiling', port)
+      printCompilationMessage("compiling", port);
 
-      devServer.compiler.hooks.done.tap('OutputMessagePlugin', (stats) => {
+      devServer.compiler.hooks.done.tap("OutputMessagePlugin", (stats) => {
         setImmediate(() => {
           if (stats.hasErrors()) {
-            printCompilationMessage('failure', port)
+            printCompilationMessage("failure", port);
           } else {
-            printCompilationMessage('success', port)
+            printCompilationMessage("success", port);
           }
-        })
-      })
-    }
+        });
+      });
+    },
   },
 
   module: {
@@ -58,9 +58,14 @@ module.exports = (_, argv) => ({
         },
       },
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,
-        type: 'asset/resource', // This handles image assets by default
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
       },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: "asset/resource",
+      },
+      { test: /\.json$/, type: "json" },
     ],
   },
 
@@ -68,13 +73,14 @@ module.exports = (_, argv) => ({
     new ModuleFederationPlugin({
       name: "host",
       filename: "remoteEntry.js",
-        remotes: {
-          clients: "clients@http://localhost:3001/remoteEntry.js",
-          library: "library@http://localhost:3002/remoteEntry.js",
-        },
-      
+      remotes: {
+        clients: "clients@http://localhost:3001/remoteEntry.js",
+        library: "library@http://localhost:3002/remoteEntry.js",
+      },
+
       exposes: {
         "./Error": "./src/pages/Error.jsx",
+        "./hooks/useLanguageDirection": "./src/hooks/useLanguageDirection.js",
       },
       shared: {
         ...deps,
@@ -91,6 +97,6 @@ module.exports = (_, argv) => ({
     new HtmlWebPackPlugin({
       template: "./src/index.html",
     }),
-    new Dotenv()
+    new Dotenv(),
   ],
 });

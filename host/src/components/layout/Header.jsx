@@ -1,16 +1,26 @@
 import styled from "styled-components";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import PathConstants from "../../routes/pathConstants";
+import { useTranslation } from "react-i18next";
 import logo from "../../assets/images/kahunas-logo.svg";
+import PathConstants from "../../pathConstants";
+import useSwitchLanguage from "../../hooks/useSwitchLanguage";
 
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { t, i18n } = useTranslation();
+  const {switchAllLanguages} = useSwitchLanguage();
 
-  const isActiveLink = (path) => location.pathname === path;
+  const isActiveLink = (path) => {
+    return location.pathname === path;
+  };
 
   const handleLoginClick = () => {
-    navigate(PathConstants.LOGIN); 
+    navigate(PathConstants.LOGIN);
+  };
+
+  const switchLanguage = (languageKey) => {
+    switchAllLanguages(languageKey);
   };
 
   return (
@@ -18,10 +28,7 @@ const Header = () => {
       <div className="header-menu">
         <div className="header-left">
           <Link to={PathConstants.HOME}>
-            <img
-              src={logo}
-              alt="Kahunas Logo"
-            />
+            <img src={logo} alt="Kahunas Logo" />
           </Link>
           <ul className="header-list">
             <li>
@@ -29,7 +36,7 @@ const Header = () => {
                 to={PathConstants.CLIENTS}
                 className={isActiveLink(PathConstants.CLIENTS) ? "active" : ""}
               >
-                Clients
+                {t("clients")}
               </Link>
             </li>
             <li>
@@ -37,17 +44,27 @@ const Header = () => {
                 to={PathConstants.LIBRARY}
                 className={isActiveLink(PathConstants.LIBRARY) ? "active" : ""}
               >
-                Library
+                {t("library")}
               </Link>
             </li>
           </ul>
         </div>
 
         <div className="header-right">
-          <button onClick={handleLoginClick}>Login</button>
+          <button onClick={handleLoginClick}> {t("login")}</button>
           <div className="language-switcher">
-            <span>EN</span>
-            <span>AR</span>
+            <span
+              className={i18n.language === "en" ? "active" : ""}
+              onClick={() => switchLanguage("en")}
+            >
+              {t("en")}
+            </span>
+            <span
+              className={i18n.language === "ar" ? "active" : ""}
+              onClick={() => switchLanguage("ar")}
+            >
+              {t("ar")}
+            </span>
           </div>
         </div>
       </div>
@@ -114,6 +131,7 @@ const HeaderContainer = styled.div`
         border-radius: 12px;
         outline: none;
         box-shadow: none;
+        font-family: "Poppins";
         font-size: 14px;
         font-weight: 500;
         line-height: 18px;
@@ -134,6 +152,14 @@ const HeaderContainer = styled.div`
           font-weight: 500;
           color: #2b3359;
           cursor: pointer;
+
+          &.active {
+            text-decoration: underline;
+          }
+
+          &:hover {
+            color: #3e97ff;
+          }
         }
       }
     }
