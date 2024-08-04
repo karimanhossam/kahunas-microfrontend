@@ -81,6 +81,7 @@ module.exports = (_, argv) => ({
       exposes: {
         "./Error": "./src/pages/Error.jsx",
         "./hooks/useLanguageDirection": "./src/hooks/useLanguageDirection.js",
+        "./hooks/useAuthMiddleware": "./src/hooks/useAuthMiddleware.js",
       },
       shared: {
         ...deps,

@@ -17,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const App = () => {
- 
+
   return (
     <I18nextProvider i18n={clientsInstance}>
         <GlobalStyle />

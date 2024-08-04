@@ -1,8 +1,9 @@
 {
     "clients": "Clients",
     "library": "Library",
-    "login": "Login",
+    "login": "Login",    
     "en": "English",
-    "ar": "Arabic"
+    "ar": "Arabic",
+    "logout": "Logout"
 
 }

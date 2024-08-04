@@ -4,12 +4,14 @@ import { useTranslation } from "react-i18next";
 import logo from "../../assets/images/kahunas-logo.svg";
 import PathConstants from "../../pathConstants";
 import useSwitchLanguage from "../../hooks/useSwitchLanguage";
+import useAuthMiddleware from "../../hooks/useAuthMiddleware";
 
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { t, i18n } = useTranslation();
-  const {switchAllLanguages} = useSwitchLanguage();
+  const { switchAllLanguages } = useSwitchLanguage();
+  const { isAuthenticated, logout } = useAuthMiddleware();
 
   const isActiveLink = (path) => {
     return location.pathname === path;
@@ -19,6 +21,9 @@ const Header = () => {
     navigate(PathConstants.LOGIN);
   };
 
+  const handleLogoutClick = () => {
+    logout(()=> navigate(PathConstants.HOME));
+  };
   const switchLanguage = (languageKey) => {
     switchAllLanguages(languageKey);
   };
@@ -30,28 +35,40 @@ const Header = () => {
           <Link to={PathConstants.HOME}>
             <img src={logo} alt="Kahunas Logo" />
           </Link>
-          <ul className="header-list">
-            <li>
-              <Link
-                to={PathConstants.CLIENTS}
-                className={isActiveLink(PathConstants.CLIENTS) ? "active" : ""}
-              >
-                {t("clients")}
-              </Link>
-            </li>
-            <li>
-              <Link
-                to={PathConstants.LIBRARY}
-                className={isActiveLink(PathConstants.LIBRARY) ? "active" : ""}
-              >
-                {t("library")}
-              </Link>
-            </li>
-          </ul>
+          {isAuthenticated && (
+            <ul className="header-list">
+              <li>
+                <Link
+                  to={PathConstants.CLIENTS}
+                  className={
+                    isActiveLink(PathConstants.CLIENTS) ? "active" : ""
+                  }
+                >
+                  {t("clients")}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to={PathConstants.LIBRARY}
+                  className={
+                    isActiveLink(PathConstants.LIBRARY) ? "active" : ""
+                  }
+                >
+                  {t("library")}
+                </Link>
+              </li>
+            </ul>
+          )}
         </div>
 
         <div className="header-right">
-          <button onClick={handleLoginClick}> {t("login")}</button>
+          {isAuthenticated ? (
+            <button onClick={handleLogoutClick}>{t("logout")}</button>
+          ) : !isActiveLink(PathConstants.LOGIN) ? (
+            <button onClick={handleLoginClick}> {t("login")}</button>
+          ) : (
+            <></>
+          )}
           <div className="language-switcher">
             <span
               className={i18n.language === "en" ? "active" : ""}
