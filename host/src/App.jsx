@@ -31,8 +31,8 @@ const GlobalStyle = createGlobalStyle`
 
 const App = () => {
   return (
-    <AuthProvider>
       <Router>
+            <AuthProvider>
         <I18nextProvider i18n={hostInstance}>
           <GlobalStyle />
           <Header />
@@ -58,8 +58,8 @@ const App = () => {
             </React.Suspense>
           </div>
         </I18nextProvider>
+        </AuthProvider>
       </Router>
-    </AuthProvider>
   );
 };
 
