@@ -15,9 +15,17 @@ import Error from "./pages/Error";
 
 const GlobalStyle = createGlobalStyle`
   body {
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #3f4254;
+    background-color: #fff;
+  }
+
+  .app-content {
+    margin: 22px 60px;
   }
 `;
 
@@ -26,21 +34,29 @@ const App = () => {
     <AuthProvider>
       <Router>
         <I18nextProvider i18n={hostInstance}>
-        <GlobalStyle />
+          <GlobalStyle />
           <Header />
-          <React.Suspense fallback="Loading...">
-            <Routes>
-              <Route path={PathConstants.HOME} element={<Home />} />
-              <Route path={PathConstants.LOGIN} element={<LoginForm />} />
-              <Route path={`${PathConstants.CLIENTS}/*`} element={<Clients />}>
-                <Route index element={<Clients />} />
-              </Route>
-              <Route path={`${PathConstants.LIBRARY}/*`} element={<Library />}>
-                <Route index element={<Library />} />
-              </Route>
-              <Route path="*" element={<Error />} />
-            </Routes>
-          </React.Suspense>
+          <div className="app-content">
+            <React.Suspense fallback="Loading...">
+              <Routes>
+                <Route path={PathConstants.HOME} element={<Home />} />
+                <Route path={PathConstants.LOGIN} element={<LoginForm />} />
+                <Route
+                  path={`${PathConstants.CLIENTS}/*`}
+                  element={<Clients />}
+                >
+                  <Route index element={<Clients />} />
+                </Route>
+                <Route
+                  path={`${PathConstants.LIBRARY}/*`}
+                  element={<Library />}
+                >
+                  <Route index element={<Library />} />
+                </Route>
+                <Route path="*" element={<Error />} />
+              </Routes>
+            </React.Suspense>
+          </div>
         </I18nextProvider>
       </Router>
     </AuthProvider>

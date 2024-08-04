@@ -33,7 +33,7 @@ const Header = () => {
       <div className="header-menu">
         <div className="header-left">
           <Link to={PathConstants.HOME}>
-            <img src={logo} alt="Kahunas Logo" />
+            <img src={logo} alt="Kahunas logo" />
           </Link>
           {isAuthenticated && (
             <ul className="header-list">
