@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import PathConstants from "../pathConstants";
 import nameIcon from "../assets/images/name-icon.svg";
 import activityIcon from "../assets/images/activity-icon.svg";
 import trainingIcon from "../assets/images/training-icon.svg";

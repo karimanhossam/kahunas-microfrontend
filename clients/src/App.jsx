@@ -7,8 +7,6 @@ import clientsInstance from "./i18n";
 import Error from "host/Error";
 import Home from "./pages/Home";
 import ClientDetails from "./pages/ClientDetails";
-import PathConstants from "./pathConstants";
-
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -49,4 +47,5 @@ root.render(
       <App />
     </Router>
   </StrictMode>
+
 );

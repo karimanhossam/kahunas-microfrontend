@@ -1,7 +1,7 @@
 const PathConstants = {
-    LOGIN: "login",
-    CLIENTS: "clients",
-    LIBRARY: "library"
+    LOGIN: "/login",
+    CLIENTS: "/clients",
+    LIBRARY: "/library"
 }
 
 export default PathConstants;
