@@ -5,5 +5,10 @@
     "workout_details": "Workout Details",
     "exercise_name": "Exercise Name",
     "muscle_group": "Muscle Group",
-    "strength": "Strength"
+    "strength": "Strength",
+    "workout_name_value": "Leg Day Challenge",
+    "workout_details_value": "A rigorous workout designed to enhance leg strength and endurance, featuring squats, lunges, and more.",
+    "exercise_name_value": "Push-up",
+    "muscle_group_value":"Chest",
+    "strength_value": "Bodyweight"
 }

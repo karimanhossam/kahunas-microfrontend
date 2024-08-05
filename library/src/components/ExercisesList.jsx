@@ -1,9 +1,20 @@
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 
-const ExercisesList = ({ exercises }) => {
+const ExercisesList = () => {
   const { t } = useTranslation();
   const columns = [t("exercise_name"), t("muscle_group"), t("strength")];
+  const rows = [];
+  
+  for (let i = 0; i < 5; i++) {
+    rows.push(
+      <tr key={i}>
+        <td>{t("exercise_name_value")}</td>
+        <td>{t("muscle_group_value")}</td>
+        <td>{t("strength_value")}</td>
+      </tr>
+    );
+  }
 
   return (
     <ExercisesTable>
@@ -15,13 +26,7 @@ const ExercisesList = ({ exercises }) => {
         </tr>
       </thead>
       <tbody>
-        {exercises.map((exercise, index) => (
-          <tr key={index}>
-            <td>{exercise.exerciseName}</td>
-            <td>{exercise.muscleGroup}</td>
-            <td>{exercise.strength}</td>
-          </tr>
-        ))}
+       {rows}
       </tbody>
     </ExercisesTable>
   );

@@ -2,8 +2,7 @@ import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import trainingIcon from "../assets/images/training-icon.svg";
 
-
-const WorkoutsList = ({ workouts }) => {
+const WorkoutsList = () => {
   const { t } = useTranslation();
   const columns = [
     { title: t("workout_name"), icon: trainingIcon },
@@ -11,6 +10,17 @@ const WorkoutsList = ({ workouts }) => {
     { title: t("exercises"), icon: trainingIcon },
   ];
 
+  const rows = [];
+
+  for (let i = 0; i < 3; i++) {
+    rows.push(
+      <tr key={i}>
+        <td>{t("workout_name_value")}</td>
+        <td>{t("workout_details_value")}</td>
+        <td>10</td>
+      </tr>
+    );
+  }
   return (
     <WorkoutsTable>
       <thead>
@@ -31,13 +41,7 @@ const WorkoutsList = ({ workouts }) => {
         </tr>
       </thead>
       <tbody>
-        {workouts.map((workout, index) => (
-          <tr key={index}>              
-            <td>{workout.workoutName}</td>
-            <td>{workout.workoutDetails}</td>
-            <td>{workout.numberOfExercises}</td>
-          </tr>
-        ))}
+       {rows}
       </tbody>
     </WorkoutsTable>
   );
@@ -65,7 +69,6 @@ const WorkoutsTable = styled.table`
     color: #9095a0;
     border: none;
   }
-
 
   .cell {
     display: flex;

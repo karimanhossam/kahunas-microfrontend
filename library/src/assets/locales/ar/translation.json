@@ -5,5 +5,10 @@
   "workout_details": "تفاصيل التدريب",
   "exercise_name": "اسم التمرين",
   "muscle_group": "مجموعة العضلات",
-  "strength": "القوة"
+  "strength": "القوة",
+  "workout_name_value": "تحدي يوم الساق",
+  "workout_details_value": "تمرين صارم مصمم لتعزيز قوة الساق والقدرة على التحمل، ويتضمن تمرين القرفصاء والطعنات والمزيد.",
+  "exercise_name_value": "تمرين الضغط",
+  "muscle_group_value": "الصدر",
+  "strength_value": "وزن الجسم"
 }
