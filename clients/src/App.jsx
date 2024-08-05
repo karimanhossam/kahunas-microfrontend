@@ -30,7 +30,7 @@ const App = () => {
         <GlobalStyle />
         <Routes>
           <Route index element={<Home />} />          
-          <Route path="/:id" element={<ClientDetails/>}/>
+          <Route path=':id' element={<ClientDetails/>}/>
         </Routes>
     </I18nextProvider>
   );

@@ -1,6 +1,5 @@
 const PathConstants = {
-    HOME: "/clients",
-    CLIENT: "/clients/:id",
+    CLIENT: ":id",
 }
 
 export default PathConstants;

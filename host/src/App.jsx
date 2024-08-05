@@ -40,7 +40,7 @@ const App = () => {
           <div className="app-content">
             <React.Suspense fallback="Loading...">
               <Routes>
-                <Route path={PathConstants.HOME} element={<Home />} />
+                <Route index element={<Home />} />
                 <Route
                   path={`${PathConstants.CLIENTS}/*`}
                   element={
@@ -49,7 +49,6 @@ const App = () => {
                     </ProtectedRoute>
                   }
                 />
-
                 <Route
                   path={`${PathConstants.LIBRARY}/*`}
                   element={

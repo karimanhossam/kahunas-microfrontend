@@ -33,7 +33,7 @@ const Header = () => {
     <HeaderContainer>
       <div className="header-menu">
         <div className="header-left">
-          <Link to={PathConstants.HOME}>
+          <Link to="/">
             <img src={logo} alt="Kahunas logo" />
           </Link>
           {isAuthenticated && (

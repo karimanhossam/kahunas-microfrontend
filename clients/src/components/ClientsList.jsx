@@ -43,7 +43,7 @@ const ClientsList = ({ clients }) => {
             <td>
               <Link
                 key={index}
-                to={`${PathConstants.CLIENT.replace(":id", client.id)}`}
+                to={`${client.id}`}
               >
                 {client.name}{" "}
               </Link>
@@ -87,7 +87,6 @@ const ClientsTable = styled.table`
   a {
     text-decoration: none;
     color: inherit;
-    
     &:hover {
       color: #3e97ff;
     }
