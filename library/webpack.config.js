@@ -11,7 +11,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = (_, argv) => ({
   output: {
-    publicPath: process.env.REACT_APP_LIBRARY_URL || "http://localhost:3002/",
+    publicPath: isProduction ? process.env.REACT_APP_LIBRARY_URL : "http://localhost:3002/",
   },
 
   resolve: {
