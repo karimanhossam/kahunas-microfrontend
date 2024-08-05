@@ -11,7 +11,7 @@ module.exports = (_, argv) => {
 
   return {
     output: {
-      publicPath: isProduction ? "https://kahunas-llibrary-mf.netlify.app/" : "http://localhost:3002/",
+      publicPath: isProduction ? "https://kahunas-library-mf.netlify.app/" : "http://localhost:3002/",
 
     },
 
