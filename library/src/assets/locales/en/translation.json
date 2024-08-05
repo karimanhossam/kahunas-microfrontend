@@ -1,3 +1,9 @@
 {
-    "hello": "Hello"
+    "workouts": "Workouts",
+    "exercises": "Exercises",
+    "workout_name": "Workout Name",
+    "workout_details": "Workout Details",
+    "exercise_name": "Exercise Name",
+    "muscle_group": "Muscle Group",
+    "strength": "Strength"
 }

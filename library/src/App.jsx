@@ -3,9 +3,12 @@ import ReactDOM from "react-dom/client";
 import { createGlobalStyle } from "styled-components";
 import {  BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { I18nextProvider } from 'react-i18next';
+import libraryInstance from "./i18n"
 import Error from "host/Error";
 import Home from "./pages/Home";
-import libraryInstance from "./i18n"
+import Workouts from "./pages/Workouts";
+import Exercises from "./pages/Exercises";
+import LibraryLayout from "./components/layout";
 
 
 const GlobalStyle = createGlobalStyle`
@@ -22,7 +25,11 @@ const App = () => {
     <I18nextProvider i18n={libraryInstance}>
       <GlobalStyle />
       <Routes>
-      <Route index element={<Home />} />
+      <Route element={<LibraryLayout />}>
+      <Route index element={<Home/>}/>
+      <Route path="workouts" element={<Workouts/>}/>
+      <Route path="exercises" element={<Exercises/>}/>
+      </Route>
       </Routes>
     </I18nextProvider>
   );

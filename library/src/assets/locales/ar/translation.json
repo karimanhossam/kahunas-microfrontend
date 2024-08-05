@@ -1,3 +1,9 @@
 {
-    "hello": "مرحبا"
+  "workouts": "التدريبات",
+  "exercises": "التمارين",
+  "workout_name": "اسم التدريب",
+  "workout_details": "تفاصيل التدريب",
+  "exercise_name": "اسم التمرين",
+  "muscle_group": "مجموعة العضلات",
+  "strength": "القوة"
 }

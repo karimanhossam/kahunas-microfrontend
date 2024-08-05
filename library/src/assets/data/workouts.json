@@ -1,0 +1,18 @@
+[
+    {
+      "workoutName": "Full Body Blast",
+      "workoutDetails": "A comprehensive workout targeting all major muscle groups with a mix of cardio and strength exercises.",
+      "numberOfExercises": 12
+    },
+    {
+      "workoutName": "Upper Body Strength",
+      "workoutDetails": "Focuses on building strength and muscle in the upper body, including arms, shoulders, and chest.",
+      "numberOfExercises": 8
+    },
+    {
+      "workoutName": "Leg Day Challenge",
+      "workoutDetails": "A rigorous workout designed to enhance leg strength and endurance, featuring squats, lunges, and more.",
+      "numberOfExercises": 10
+    }
+  ]
+  

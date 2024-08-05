@@ -39,7 +39,7 @@ const ClientsList = ({ clients }) => {
       </thead>
       <tbody>
         {clients.map((client, index) => (
-          <tr>
+          <tr key={index}>
             <td>
               <Link
                 key={index}
