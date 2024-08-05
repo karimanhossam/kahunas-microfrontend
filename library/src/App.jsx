@@ -26,7 +26,7 @@ const App = () => {
       <GlobalStyle />
       <Routes>
       <Route element={<LibraryLayout />}>
-      <Route index element={<Home/>}/>
+      <Route index element={<Workouts/>}/>
       <Route path="workouts" element={<Workouts/>}/>
       <Route path="exercises" element={<Exercises/>}/>
       </Route>
