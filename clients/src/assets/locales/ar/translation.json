@@ -1,3 +1,16 @@
 {
-    "hello": "مرحبا"
+    "all_clients": "جميع العملاء",
+    "search_client": "ابحث عن عميل",
+    "name": "الاسم",
+    "last_activity": "النشاط الاخير",
+    "training_progress": "تقدم التدريب",
+    "category": "الفئة",
+    "status": "الحالة",
+    "pending": "قيد الانتظار",
+    "connected": "متصل",
+    "disconnected": "غير متصل",
+    "online": "من بعد",
+    "in_person": "شخصيا",
+    "days_ago": "أيام مضت"
+
 }

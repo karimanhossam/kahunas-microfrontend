@@ -1,3 +1,16 @@
 {
-    "hello": "Hello"
+    "all_clients": "All Clients",
+    "search_client": "Search Client",
+    "name": "Name",
+    "last_activity": "Last Activity",
+    "training_progress": "Training Progress",
+    "category": "Category",
+    "status": "Status",
+    "pending": "Pending",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "online": "Online",
+    "in_person": "In-person",
+    "days_ago": "days ago"
+    
 }

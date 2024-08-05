@@ -1,0 +1,82 @@
+[
+  {
+    "id": "1",
+    "name": "John Doe",
+    "lastActivity": "2",
+    "status": "connected",
+    "category": "online",
+    "trainingProgress": "75%"
+  },
+  {
+    "id": "2",
+    "name": "Jane Smith",
+    "lastActivity": "5",
+    "status": "pending",
+    "category": "in_person",
+    "trainingProgress": "60%"
+  },
+  {
+    "id": "3",
+    "name": "Alice Johnson",
+    "lastActivity": "3",
+    "status": "disconnected",
+    "category": "online",
+    "trainingProgress": "40%"
+  },
+  {
+    "id": "4",
+    "name": "Bob Brown",
+    "lastActivity": "1",
+    "status": "connected",
+    "category": "in_person",
+    "trainingProgress": "90%"
+  },
+  {
+    "id": "5",
+    "name": "Charlie Green",
+    "lastActivity": "7",
+    "status": "pending",
+    "category": "online",
+    "trainingProgress": "50%"
+  },
+  {
+    "id": "6",
+    "name": "Diana King",
+    "lastActivity": "3",
+    "status": "connected",
+    "category": "in_person",
+    "trainingProgress": "85%"
+  },
+  {
+    "id": "7",
+    "name": "Ethan White",
+    "lastActivity": "4",
+    "status": "disconnected",
+    "category": "online",
+    "trainingProgress": "30%"
+  },
+  {
+    "id": "8",
+    "name": "Fiona Black",
+    "lastActivity": "6",
+    "status": "connected",
+    "category": "in_person",
+    "trainingProgress": "95%"
+  },
+  {
+    "id": "9",
+    "name": "George Clark",
+    "lastActivity": "2",
+    "status": "pending",
+    "category": "online",
+    "trainingProgress": "70%"
+  },
+  {
+    "id": "10",
+    "name": "Hannah Wright",
+    "lastActivity": "5",
+    "status": "disconnected",
+    "category": "in_person",
+    "trainingProgress": "65%"
+  }
+]

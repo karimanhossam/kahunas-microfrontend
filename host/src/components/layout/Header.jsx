@@ -14,7 +14,7 @@ const Header = () => {
   const { isAuthenticated, logout } = useAuthMiddleware();
 
   const isActiveLink = (path) => {
-    return location.pathname === path;
+    return location.pathname.includes(path);
   };
 
   const handleLoginClick = () => {

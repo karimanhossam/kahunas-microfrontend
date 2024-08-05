@@ -6,7 +6,7 @@ import { I18nextProvider } from 'react-i18next';
 import clientsInstance from "./i18n";
 import Error from "host/Error";
 import Home from "./pages/Home";
-import Client from "./pages/Client";
+import ClientDetails from "./pages/ClientDetails";
 import PathConstants from "./pathConstants";
 
 
@@ -30,8 +30,7 @@ const App = () => {
         <GlobalStyle />
         <Routes>
           <Route index element={<Home />} />          
-          <Route path={PathConstants.CLIENT} element={<Client/>}/>
-          <Route path="*" element={<Error/>}/>
+          <Route path="/:id" element={<ClientDetails/>}/>
         </Routes>
     </I18nextProvider>
   );
