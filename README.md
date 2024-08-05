@@ -33,6 +33,10 @@ Authentication is only required for protected routes. Use the following credenti
 - **Email**: coach@kahunas.io
 - **Password**: pass@123
 
+## Internationalization
+
+The application supports internationalization with English and Arabic languages. You can switch between these languages based on your preferences. The current language setting will be used across the application for consistent user experience.
+
 
 
 
