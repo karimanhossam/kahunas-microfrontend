@@ -7,6 +7,7 @@ const deps = require("./package.json").dependencies;
 
 const printCompilationMessage = require("./compilation.config.js");
 
+const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = (_, argv) => ({
   output: {
@@ -75,8 +76,8 @@ module.exports = (_, argv) => ({
       name: "library",
       filename: "remoteEntry.js",
       remotes: {
-        host: `host@${process.env.REACT_APP_HOST_URL || "http://localhost:3000"}/remoteEntry.js`,
-        clients: `clients@${ process.env.REACT_APP_CLIENTS_URL || "http://localhost:3001"}/remoteEntry.js`,
+        host: `host@${isProduction ? process.env.REACT_APP_HOST_URL : "http://localhost:3000"}/remoteEntry.js`,
+        clients: `clients@${ isProduction ? process.env.REACT_APP_CLIENTS_URL : "http://localhost:3001"}/remoteEntry.js`,
       },
       exposes: {
         "./App": "./src/App.jsx",

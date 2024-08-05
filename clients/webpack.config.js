@@ -6,10 +6,11 @@ const Dotenv = require('dotenv-webpack');
 const deps = require("./package.json").dependencies;
 
 const printCompilationMessage = require('./compilation.config.js');
+const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = (_, argv) => ({
   output: {
-    publicPath: process.env.REACT_APP_CLIENTS_URL || "http://localhost:3001/",
+    publicPath: isProduction ? process.env.REACT_APP_CLIENTS_URL : "http://localhost:3001/",
 
   },
 
@@ -75,8 +76,8 @@ module.exports = (_, argv) => ({
       name: "clients",
       filename: "remoteEntry.js",
       remotes: {
-        host: `host@${ process.env.REACT_APP_HOST_URL || "http://localhost:3000"}/remoteEntry.js`,
-        library: `library@${ process.env.REACT_APP_LIBRARY_URL || "http://localhost:3002/library"}/remoteEntry.js`,
+        host: `host@${isProduction ? process.env.REACT_APP_HOST_URL : "http://localhost:3000"}/remoteEntry.js`,
+        library:`library@${ isProduction ? process.env.REACT_APP_LIBRARY_URL : "http://localhost:3002"}/remoteEntry.js`,
       },
       exposes: {
         "./App": "./src/App.jsx",
