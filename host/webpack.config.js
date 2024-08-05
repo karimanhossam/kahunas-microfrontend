@@ -7,11 +7,12 @@ const deps = require("./package.json").dependencies;
 
 const printCompilationMessage = require("./compilation.config.js");
 
+const isProduction = process.env.NODE_ENV === 'production'
+
 module.exports = (_, argv) => ({
   output: {
-    publicPath: "http://localhost:3000/",
+    publicPath: isProduction ? process.env.REACT_APP_HOST_URL : "http://localhost:3000",
   },
-
   resolve: {
     extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
   },
@@ -74,8 +75,8 @@ module.exports = (_, argv) => ({
       name: "host",
       filename: "remoteEntry.js",
       remotes: {
-        clients: "clients@http://localhost:3001/remoteEntry.js",
-        library: "library@http://localhost:3002/remoteEntry.js",
+        clients: `clients@${isProduction ? process.env.REACT_APP_CLIENTS_URL : "http://localhost:3001"}/remoteEntry.js`,
+        library: `library@${isProduction ? process.env.REACT_APP_LIBRARY_URL : "http://localhost:3002"}/remoteEntry.js`,
       },
 
       exposes: {

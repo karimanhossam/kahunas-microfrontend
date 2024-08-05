@@ -1,15 +1,17 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
-const path = require('path');
-const Dotenv = require('dotenv-webpack');
+const path = require("path");
+const Dotenv = require("dotenv-webpack");
 
 const deps = require("./package.json").dependencies;
 
-const printCompilationMessage = require('./compilation.config.js');
+const printCompilationMessage = require("./compilation.config.js");
+
+const isProduction = process.env.NODE_ENV === 'production'
 
 module.exports = (_, argv) => ({
   output: {
-    publicPath: "http://localhost:3002/",
+    publicPath: isProduction ? process.env.REACT_APP_LIBRARY_URL : "http://localhost:3002",
   },
 
   resolve: {
@@ -19,22 +21,22 @@ module.exports = (_, argv) => ({
   devServer: {
     port: 3002,
     historyApiFallback: true,
-    watchFiles: [path.resolve(__dirname, 'src')],
+    watchFiles: [path.resolve(__dirname, "src")],
     onListening: function (devServer) {
-      const port = devServer.server.address().port
+      const port = devServer.server.address().port;
 
-      printCompilationMessage('compiling', port)
+      printCompilationMessage("compiling", port);
 
-      devServer.compiler.hooks.done.tap('OutputMessagePlugin', (stats) => {
+      devServer.compiler.hooks.done.tap("OutputMessagePlugin", (stats) => {
         setImmediate(() => {
           if (stats.hasErrors()) {
-            printCompilationMessage('failure', port)
+            printCompilationMessage("failure", port);
           } else {
-            printCompilationMessage('success', port)
+            printCompilationMessage("success", port);
           }
-        })
-      })
-    }
+        });
+      });
+    },
   },
 
   module: {
@@ -74,12 +76,12 @@ module.exports = (_, argv) => ({
       name: "library",
       filename: "remoteEntry.js",
       remotes: {
-        host: "host@http://localhost:3000/remoteEntry.js",
-        clients: "clients@http://localhost:3001/remoteEntry.js",
-      }, 
+        host: `host@${isProduction ? process.env.REACT_APP_HOST_URL : "http://localhost:3000"}/remoteEntry.js`,
+        clients: `clients@${isProduction ? process.env.REACT_APP_CLIENTS_URL : "http://localhost:3001"}/remoteEntry.js`,
+      },
       exposes: {
         "./App": "./src/App.jsx",
-        './hooks/useSwitchLibraryLanguage': './src/hooks/useSwitchLanguage',
+        "./hooks/useSwitchLibraryLanguage": "./src/hooks/useSwitchLanguage",
       },
       shared: {
         ...deps,
@@ -96,6 +98,6 @@ module.exports = (_, argv) => ({
     new HtmlWebPackPlugin({
       template: "./src/index.html",
     }),
-    new Dotenv()
+    new Dotenv(),
   ],
 });
