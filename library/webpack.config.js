@@ -11,7 +11,7 @@ module.exports = (_, argv) => {
 
   return {
     output: {
-      publicPath: isProduction ? process.env.REACT_APP_LIBRARY_URL : "http://localhost:3002/",
+      publicPath: isProduction ? "https://kahunas-library-mf.netlify.app" : "http://localhost:3002/",
     },
 
     resolve: {
@@ -76,8 +76,8 @@ module.exports = (_, argv) => {
         name: "library",
         filename: "remoteEntry.js",
         remotes: {
-          host: `host@${isProduction ? process.env.REACT_APP_HOST_URL : "http://localhost:3000"}/remoteEntry.js`,
-          clients: `clients@${isProduction ? process.env.REACT_APP_CLIENTS_URL : "http://localhost:3001"}/remoteEntry.js`,
+          host: `host@${isProduction ? "https://kahunas-mf.netlify.app" : "http://localhost:3000"}/remoteEntry.js`,
+          clients: `clients@${isProduction ? "https://kahunas-clients-mf.netlify.app" : "http://localhost:3001"}/remoteEntry.js`,
         },
         exposes: {
           "./App": "./src/App.jsx",
