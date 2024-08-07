@@ -29,6 +29,7 @@ const App = () => {
         <Routes>
           <Route index element={<Home />} />          
           <Route path=':id' element={<ClientDetails/>}/>
+          <Route path="*" element={<Error/>}/>
         </Routes>
     </I18nextProvider>
   );

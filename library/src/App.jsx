@@ -5,7 +5,6 @@ import {  BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { I18nextProvider } from 'react-i18next';
 import libraryInstance from "./i18n"
 import Error from "host/Error";
-import Home from "./pages/Home";
 import Workouts from "./pages/Workouts";
 import Exercises from "./pages/Exercises";
 import LibraryLayout from "./components/layout";
@@ -31,6 +30,7 @@ const App = () => {
         <Route path="workouts" element={<Workouts/>}/>
         <Route path="exercises" element={<Exercises/>}/>
       </Route>
+      <Route path="*" element={<Error/>}/>
       </Routes>
     </I18nextProvider>
   );
