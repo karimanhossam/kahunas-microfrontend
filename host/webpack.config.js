@@ -6,12 +6,9 @@ const Dotenv = require("dotenv-webpack");
 const deps = require("./package.json").dependencies;
 const printCompilationMessage = require("./compilation.config.js");
 
-module.exports = (_, argv) => {
-  const isProduction = argv.mode === 'production';
-
-  return {
+module.exports = (_, argv) => ({
     output: {
-      publicPath: isProduction ? "https://kahunas-mf.netlify.app/" : "http://localhost:3000/",
+      publicPath:  "http://localhost:3000/",
     },
 
     resolve: {
@@ -76,8 +73,8 @@ module.exports = (_, argv) => {
         name: "host",
         filename: "remoteEntry.js",
         remotes: {
-          clients: isProduction ? "clients@https://kahunas-clients-mf.netlify.app/remoteEntry.js" : "clients@http://localhost:3001/remoteEntry.js",
-          library: isProduction ? "library@https://kahunas-library-mf.netlify.app/remoteEntry.js" : "library@http://localhost:3002/remoteEntry.js",
+          clients:  "clients@http://localhost:3001/remoteEntry.js",
+          library:  "library@http://localhost:3002/remoteEntry.js",
         },
         exposes: {
           "./Error": "./src/pages/Error.jsx",
@@ -101,5 +98,5 @@ module.exports = (_, argv) => {
       }),
       new Dotenv(),
     ],
-  };
-};
+  });
+
