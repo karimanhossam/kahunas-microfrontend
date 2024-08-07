@@ -17,6 +17,7 @@ const GlobalStyle = createGlobalStyle`
     font-size: 14px;
     font-weight: 500;
   }
+
 `;
 
 const App = () => {
@@ -26,9 +27,9 @@ const App = () => {
       <GlobalStyle />
       <Routes>
       <Route element={<LibraryLayout />}>
-      <Route index element={<Workouts/>}/>
-      <Route path="workouts" element={<Workouts/>}/>
-      <Route path="exercises" element={<Exercises/>}/>
+        <Route index element={<Workouts/>}/>
+        <Route path="workouts" element={<Workouts/>}/>
+        <Route path="exercises" element={<Exercises/>}/>
       </Route>
       </Routes>
     </I18nextProvider>

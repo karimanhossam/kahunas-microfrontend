@@ -1,12 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createGlobalStyle } from "styled-components";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from "react-router-dom";
 import { I18nextProvider } from "react-i18next";
 import PathConstants from "./pathConstants";
 import hostInstance from "./i18n";
 import { AuthProvider } from "./context/AuthContext";
-import Header from "./components/layout/Header";
+import RootLayout from "./components/layout/RootLayout";
 import Home from "./pages/Home";
 import LoginForm from "./components/LoginForm";
 import Clients from "clients/App";
@@ -25,47 +31,46 @@ const GlobalStyle = createGlobalStyle`
     background-color: #fff;
   }
 
-  .app-content {
+  main {
     margin: 22px 60px;
+    max-width: 1200px;
   }
 `;
 
 const App = () => {
-  return (
-    <Router>
-      <AuthProvider>
-        <I18nextProvider i18n={hostInstance}>
-          <GlobalStyle />
-          <Header />
-          <div className="app-content">
-            <React.Suspense fallback="Loading...">
-              <Routes>
-                <Route index element={<Home />} />
-                <Route
-                  path={`${PathConstants.CLIENTS}/*`}
-                  element={
-                    <ProtectedRoute>
-                      <Clients />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path={`${PathConstants.LIBRARY}/*`}
-                  element={
-                    <ProtectedRoute>
-                      <Library />
-                    </ProtectedRoute>
-                  }
-                />
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<RootLayout/>}>
+        <Route index element={<Home />} />
+        <Route path={PathConstants.LOGIN} element={<LoginForm />} />
+        <Route
+          path={`${PathConstants.CLIENTS}/*`}
+          element={
+            <ProtectedRoute>
+              <Clients />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={`${PathConstants.LIBRARY}/*`}
+          element={
+            <ProtectedRoute>
+              <Library />
+            </ProtectedRoute>
+          }
+        />
 
-                <Route path={PathConstants.LOGIN} element={<LoginForm />} />
-                <Route path="*" element={<Error />} />
-              </Routes>
-            </React.Suspense>
-          </div>
-        </I18nextProvider>
-      </AuthProvider>
-    </Router>
+        <Route path="*" element={<Error />} />
+      </Route>
+    )
+  );
+  return (
+    <AuthProvider>
+      <I18nextProvider i18n={hostInstance}>
+        <RouterProvider router={router} />
+        <GlobalStyle />
+      </I18nextProvider>
+    </AuthProvider>
   );
 };
 
